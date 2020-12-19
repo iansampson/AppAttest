@@ -18,6 +18,7 @@ struct AuthenticatorData: Equatable {
     
     init(bytes: Data) throws {
         self.bytes = bytes
+
         if let aaguid = AAGUID(bytes: bytes[37..<53]) {
             self.aaguid = aaguid
         } else {
@@ -55,8 +56,9 @@ struct AuthenticatorData: Equatable {
         init?(bytes: Data) {
             if let id = AAGUID.allCases.first(where: { bytes == $0.bytes }) {
                 self = id
+            } else {
+                return nil
             }
-            return nil
         }
         
         var bytes: Data {
@@ -75,7 +77,7 @@ struct AuthenticatorData: Equatable {
         // of the credentialID as a UInt16.
         let length = bytes[53..<55].reduce(0) { value, byte in
             value << 8 | UInt16(byte)
-        }
+        } // TODO: Refactor this into a generic function.
         return bytes[55..<(55 + length)]
     }
 }

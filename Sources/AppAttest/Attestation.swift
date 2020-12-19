@@ -17,6 +17,8 @@ struct Attestation: Equatable {
     
     struct Statement: Equatable {
         let certificates: [X509.Certificate]
+        // TODO: Make certificates a struct with labels
+        // and only two properties.
         let receipt: Data
     }
     
