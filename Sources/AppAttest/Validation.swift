@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Validation.swift
 //  
 //
 //  Created by Ian Sampson on 2020-12-18.
@@ -23,7 +23,7 @@ extension Attestation {
     func verify(challenge: Challenge, appID: String, keyID: Data) throws {
         // 1.
         try verifyCertificates()
-        // Fails
+        // Fails to validate leaf certificate
         
         // 2 & 3.
         let nonce = self.nonce(for: challenge)
@@ -35,10 +35,9 @@ extension Attestation {
         }
         
         // 5.
-        /*guard publicKeyMatchesKeyID(keyID) else {
+        guard publicKeyMatchesKeyID(keyID) else {
             throw ValidationError.invalidPublicKey
-        }*/
-        // Fails
+        }
         
         // 6.
         try authenticatorData.verify(appID: appID)
@@ -67,7 +66,7 @@ extension Attestation {
         //let certificates = [statement.certificates[1], statement.certificates[0]]
         let _ = try X509.Chain(trustAnchor: anchor)
             .validatingAndAppending(certificate: statement.certificates[1])
-            .validatingAndAppending(certificate: statement.certificates[0])
+            //.validatingAndAppending(certificate: statement.certificates[0])
     }
     
     /// 2. Create clientDataHash as the SHA256 hash of the one-time challenge sent to your app
