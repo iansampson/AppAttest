@@ -51,16 +51,6 @@ struct AssertionData {
             case production
             case development
         }
-        
-        /*var encoded: _AttestationData {
-            AttestationData(
-                appID: teamIdentifier + "." + bundleIdentifier,
-                keyID: keyIdBase64,
-                challenge: clientDataBase64,
-                attestation: attestationBase64,
-                timestamp: timestamp
-            ).encoded
-        }*/
     }
 }
 

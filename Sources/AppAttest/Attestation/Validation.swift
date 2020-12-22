@@ -20,7 +20,7 @@ extension Attestation {
     // TODO: Rewrite as a struct with expected and received
     // or with compared values. Or add associated types.
     
-    func verify(challenge: Challenge, appID: String, keyID: Data, date: Date? = nil) throws {
+    func verify(challenge: Data, appID: String, keyID: Data, date: Date? = nil) throws {
         // 1.
         try verifyCertificates(date: date)
         // Fails to validate leaf certificate
@@ -74,8 +74,8 @@ extension Attestation {
     /// before performing the attestation, and append that hash to the end of the authenticator data
     /// (authData from the decoded object).
     /// 3. Generate a new SHA256 hash of the composite item to create nonce.
-    func nonce(for challenge: Challenge) -> SHA256.Digest {
-        let clientDataHash = Data(SHA256.hash(data: challenge.data))
+    func nonce(for challenge: Data) -> SHA256.Digest {
+        let clientDataHash = Data(SHA256.hash(data: challenge))
         return SHA256.hash(data: authenticatorData.bytes + clientDataHash)
     }
     

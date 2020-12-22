@@ -6,17 +6,25 @@ final class AppAttestTests: XCTestCase {
     func testAttestation() {
         do {
             try [
-                AttestationData.iOS14_2,
-                AttestationData.iOS14_3Beta2,
-                AttestationData.iOS14_3Beta3,
-                AttestationData.iOS14_3
+                AttestationSample.iOS14_2,
+                AttestationSample.iOS14_3Beta2,
+                AttestationSample.iOS14_3Beta3,
+                AttestationSample.iOS14_3
             ]
                 .map {
                     $0.encoded
                 }
                 .forEach {
-                    let attestation = try Attestation(data: $0.attestation)
-                    try attestation.verify($0)
+                    let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
+                    let result = try AppAttest.verify(
+                        attestation: $0.attestation,
+                        challenge: $0.challenge,
+                        appID: appID,
+                        keyID: $0.keyID,
+                        date: $0.date
+                    )
+                    print(result.publicKey)
+                    print(result.receipt)
                 }
         } catch {
             XCTFail(error.localizedDescription)
@@ -41,3 +49,5 @@ final class AppAttestTests: XCTestCase {
 }
 
 // TODO: Add tests for invalid attestations and assertions.
+// TODO: Support receipt validation and fraud assessment
+// https://developer.apple.com/documentation/devicecheck/assessing_fraud_risk

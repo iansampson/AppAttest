@@ -1,5 +1,5 @@
 //
-//  TestData.swift
+//  AttestationSample.swift
 //  
 //
 //  Created by Ian Sampson on 2020-12-19.
@@ -8,8 +8,17 @@
 import Foundation
 @testable import AppAttest
 
-extension AttestationData {
-    struct Full {
+enum AttestationSample {
+    struct Short {
+        let teamID: String
+        let bundleID: String
+        let keyID: Data
+        let challenge: Data
+        let attestation: Data
+        let date: Date
+    }
+    
+    struct Long {
         let id: String
         
         let teamIdentifier: String
@@ -31,20 +40,21 @@ extension AttestationData {
             case development
         }
         
-        var encoded: _AttestationData {
-            AttestationData(
-                appID: teamIdentifier + "." + bundleIdentifier,
-                keyID: keyIdBase64,
-                challenge: clientDataBase64,
-                attestation: attestationBase64,
-                timestamp: timestamp
-            ).encoded
+        var encoded: Short {
+            return Short(
+                teamID: teamIdentifier,
+                bundleID: bundleIdentifier,
+                keyID: Data(base64Encoded: keyIdBase64)!,
+                challenge: Data(base64Encoded: clientDataBase64)!,
+                attestation: Data(base64Encoded: attestationBase64)!,
+                date: Date(timeIntervalSince1970: timestamp)
+            )
         }
     }
 }
 
 struct AttestationData {
-    let appID: String
+    /*let appID: String
     let keyID: String // Base64-encoded
     let challenge: String // Base64-encoded
     let attestation: String // Base64-encoded
@@ -52,32 +62,34 @@ struct AttestationData {
     
     var encoded: _AttestationData {
         _AttestationData(self)
-    }
+    }*/
 }
 
 struct _AttestationData {
-    let appID: String
+    //let appID: String
+    let teamID: String
+    let bundleID: String
     let keyID: Data
     let challenge: Data
     let attestation: Data
     let timestamp: Double
     
-    init(_ unencoded: AttestationData) {
+    /*init(_ unencoded: AttestationData) {
         self.appID = unencoded.appID
         self.keyID = Data(base64Encoded: unencoded.keyID)!
         self.challenge = Data(base64Encoded: unencoded.challenge)!
         self.attestation = Data(base64Encoded: unencoded.attestation)!
         self.timestamp = unencoded.timestamp
-    }
+    }*/
 }
 
-extension Attestation {
+/*extension Attestation {
     func verify(_ testData: _AttestationData) throws {
         try verify(
-            challenge: Challenge(data: testData.challenge),
+            challenge: testData.challenge,
             appID: testData.appID,
             keyID: testData.keyID,
             date: Date(timeIntervalSince1970: testData.timestamp)
         )
     }
-}
+}*/
