@@ -20,9 +20,9 @@ extension Attestation {
     // TODO: Rewrite as a struct with expected and received
     // or with compared values. Or add associated types.
     
-    func verify(challenge: Challenge, appID: String, keyID: Data) throws {
+    func verify(challenge: Challenge, appID: String, keyID: Data, date: Date? = nil) throws {
         // 1.
-        try verifyCertificates()
+        try verifyCertificates(date: date)
         // Fails to validate leaf certificate
         
         // 2 & 3.
@@ -57,15 +57,21 @@ extension Attestation {
     /// 1. Verify that the x5c array contains the intermediate and leaf certificates for App Attest,
     /// starting from the credential certificate stored in the first data buffer in the array (credcert).
     /// Verify the validity of the certificates using [Apple’s App Attest root certificate](https://www.apple.com/certificateauthority/private/).
-    func verifyCertificates() throws {
+    func verifyCertificates(date: Date?) throws {
         let anchor = try X509.Certificate(
             base64Encoded: Certificates.appleAppAttestationRootCA,
             format: .der
         )
-        //let certificates = statement.certificates.reversed()
-        //let certificates = [statement.certificates[1], statement.certificates[0]]
+        
         let _ = try X509.Chain(trustAnchor: anchor)
-            .validatingAndAppending(certificate: statement.certificates[1])
+            .validatingAndAppending(
+                certificate: statement.certificates[1],
+                posixTime: date?.timeIntervalSince1970
+            )
+            .validatingAndAppending(
+                certificate: statement.certificates[0],
+                posixTime: date?.timeIntervalSince1970
+            )
             //.validatingAndAppending(certificate: statement.certificates[0])
     }
     
