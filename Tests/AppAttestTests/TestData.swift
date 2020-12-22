@@ -66,8 +66,8 @@ extension AttestationSample {
     )
 }
 
-extension AssertionData {
-    static let iOS14_3 = AssertionData.Full(
+extension AssertionSample {
+    static let iOS14_3 = Long(
         id: "85fc2fa0-cd16-78c2-b5ee-faeb95753ebb",
         teamIdentifier: "6MURL8TA57",
         bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",

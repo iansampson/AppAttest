@@ -8,7 +8,12 @@
 import Foundation
 import CryptoKit
 
-public enum AppAttest {
+public enum AppAttest { }
+
+
+// MARK: - Attestation
+
+extension AppAttest {
     public struct AttestationResult {
         let publicKey: P256.Signing.PublicKey
         let receipt: Data
@@ -56,5 +61,46 @@ public enum AppAttest {
             publicKey: publicKey,
             receipt: attestation.statement.receipt
         )
+    }
+}
+
+
+// MARK: - Assertion
+
+extension AppAttest {
+    public struct AssertionResult {
+        let counter: Int
+    }
+    
+    public struct ReceivedAssertion {
+        let assertion: Data
+        let clientData: Data
+        let challenge: Data
+    }
+    
+    // TODO: Refine this API
+    // (e.g. disambiguate what stored and received mean,
+    // and when counter should be nil.)
+    public static func verify(
+        assertion: Data,
+        clientData: Data,
+        receivedChallenge: Data,
+        
+        storedChallenge: Data, // sentChallenge?
+        storedCounter: Int?, // previousCounter?
+        
+        appID: AppID,
+        publicKey: P256.Signing.PublicKey
+    ) throws -> AssertionResult {
+        let assertion = try Assertion(cbor: assertion)
+        try assertion.verify(
+            clientData: clientData,
+            publicKey: publicKey,
+            appID: appID.description,
+            previousCounter: storedCounter,
+            receivedChallenge: receivedChallenge,
+            storedChallenge: storedChallenge
+        )
+        return AssertionResult(counter: Int(assertion.authenticatorData.counter))
     }
 }

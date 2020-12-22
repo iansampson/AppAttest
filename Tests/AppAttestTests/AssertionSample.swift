@@ -1,5 +1,5 @@
 //
-//  AssertionData.swift
+//  AssertionSample.swift
 //  
 //
 //  Created by Ian Sampson on 2020-12-21.
@@ -8,27 +8,30 @@
 import Foundation
 @testable import AppAttest
 
-// TODO: Consider renaming to AssertionSample.
-struct AssertionData {
+struct AssertionSample {
     struct Short {
+        let assertion: Data
         let clientData: Data
         let publicKey: Data
-        let appID: String
+        let teamID: String
+        let bundleID: String
         let previousCounter: Int?
         let receivedChallenge: Data
         let storedChallenge: Data
         
-        init(_ full: Full) {
-            clientData = Data(base64Encoded: full.clientDataBase64)!
-            publicKey = Data(base64Encoded: full.publicKey)!
-            appID = full.teamIdentifier + "." + full.bundleIdentifier
+        init(_ assertion: Long) {
+            self.assertion = Data(base64Encoded: assertion.assertionBase64)!
+            clientData = Data(base64Encoded: assertion.clientDataBase64)!
+            publicKey = Data(base64Encoded: assertion.publicKey)!
+            teamID = assertion.teamIdentifier
+            bundleID = assertion.bundleIdentifier
             previousCounter = nil // TODO: Or not?
-            receivedChallenge = Data(base64Encoded: full.challengeBase64)!
-            storedChallenge = Data(base64Encoded: full.challengeBase64)!
+            receivedChallenge = Data(base64Encoded: assertion.challengeBase64)!
+            storedChallenge = Data(base64Encoded: assertion.challengeBase64)!
         }
     }
     
-    struct Full {
+    struct Long {
         let id: String
         
         let teamIdentifier: String
@@ -51,10 +54,14 @@ struct AssertionData {
             case production
             case development
         }
+        
+        var encoded: Short {
+            Short(self)
+        }
     }
 }
 
-extension Assertion {
+/*extension Assertion {
     func verify(_ assertionData: AssertionData.Full) throws {
         let short = AssertionData.Short(assertionData)
         try verify(
@@ -68,4 +75,4 @@ extension Assertion {
             // really test anything, since the function just equates them.
         )
     }
-}
+}*/

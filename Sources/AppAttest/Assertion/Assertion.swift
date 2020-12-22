@@ -58,9 +58,10 @@ extension Assertion {
         // TODO: Make these errors more specific.
     }
     
+    // TODO: Consider splitting this function into smaller functions.
     func verify(
         clientData: Data,
-        publicKey: Data,
+        publicKey: P256.Signing.PublicKey,
         appID: String,
         previousCounter: Int?, // TODO: Consider renaming to storedCounter
         receivedChallenge: Data,
@@ -75,9 +76,8 @@ extension Assertion {
         
         // 3. Use the public key that you stored from the attestation object
         // to verify that the assertion’s signature is valid for nonce.
-        let signingKey = try P256.Signing.PublicKey(x963Representation: publicKey)
         let signature = try P256.Signing.ECDSASignature(derRepresentation: self.signature)
-        guard signingKey.isValidSignature(signature, for: nonce) else {
+        guard publicKey.isValidSignature(signature, for: nonce) else {
             throw ValidationError.invalidSignature
         }
         
@@ -107,7 +107,5 @@ extension Assertion {
         guard receivedChallenge == storedChallenge else {
             throw ValidationError.invalidClientData
         }
-        
-        // TODO: Store counter for use in step 5 of verifying the next assertion.
     }
 }

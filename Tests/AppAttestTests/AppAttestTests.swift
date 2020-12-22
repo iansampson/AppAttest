@@ -16,15 +16,15 @@ final class AppAttestTests: XCTestCase {
                 }
                 .forEach {
                     let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
-                    let result = try AppAttest.verify(
+                    let _ = try AppAttest.verify(
                         attestation: $0.attestation,
                         challenge: $0.challenge,
                         appID: appID,
                         keyID: $0.keyID,
                         date: $0.date
                     )
-                    print(result.publicKey)
-                    print(result.receipt)
+                    //print(result.publicKey)
+                    //print(result.receipt)
                 }
         } catch {
             XCTFail(error.localizedDescription)
@@ -34,9 +34,21 @@ final class AppAttestTests: XCTestCase {
     
     func testAssertion() {
         do {
-            let testData = AssertionData.iOS14_3
-            let assertion = try Assertion(cbor: Data(base64Encoded: testData.assertionBase64)!)
-            try assertion.verify(testData)
+            let sample = AssertionSample.iOS14_3.encoded
+            let appID = AppAttest.AppID(teamID: sample.teamID, bundleID: sample.bundleID)
+            let publicKey = try P256.Signing.PublicKey(x963Representation: sample.publicKey)
+
+            let _ = try AppAttest.verify(
+                assertion: sample.assertion,
+                clientData: sample.clientData,
+                receivedChallenge: sample.receivedChallenge,
+                storedChallenge: sample.storedChallenge,
+                storedCounter: sample.previousCounter,
+                appID: appID,
+                publicKey: publicKey
+            )
+            //print(result)
+            
         } catch {
             XCTFail(error.localizedDescription)
         }
