@@ -18,7 +18,10 @@ struct AuthenticatorData: Equatable {
     
     init(bytes: Data) throws {
         self.bytes = bytes
-
+        
+        // TODO: Consider moving this step elsewhere,
+        // since AuthenticatorData is still valid without
+        // the Apple-specific AAGUID.
         if let aaguid = AAGUID(bytes: bytes[37..<53]) {
             self.aaguid = aaguid
         } else {

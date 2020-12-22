@@ -1,40 +1,24 @@
 import XCTest
 @testable import AppAttest
 
-final class AppAttestTests: XCTestCase {
-    func testExample() {
+final class AppAttestTests: XCTestCase {    
+    func testAttestation() {
         do {
-            let testData = TestData.example.encoded
-            let challenge = Challenge(data: testData.challenge)
-            let attestation = try Attestation(data: testData.attestation)
-            try attestation.verify(
-                challenge: challenge,
-                appID: testData.appID,
-                keyID: testData.keyID,
-                date: Date(timeIntervalSince1970: 1608163200)
-            )
+            try [TestData.iOS14_2, TestData.iOS14_3Beta2, TestData.iOS14_3Beta3, TestData.iOS14_3]
+                .map {
+                    $0.encoded
+                }
+                .forEach {
+                    let attestation = try Attestation(data: $0.attestation)
+                    try attestation.verify($0)
+                }
         } catch {
             XCTFail(error.localizedDescription)
         }
-    }
-    
-    func testVeehaitch() {
-        do {
-            let testData = TestData.veehaitch.encoded
-            let challenge = Challenge(data: testData.challenge)
-            let attestation = try Attestation(data: testData.attestation)
-            try attestation.verify(
-                challenge: challenge,
-                appID: testData.appID,
-                keyID: testData.keyID,
-                date: Date(timeIntervalSince1970: 1608379862)
-            )
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
+        // TODO: Print more specific errors (i.e. which set of test data).
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testAttestation", testAttestation),
     ]
 }

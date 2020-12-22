@@ -65,14 +65,9 @@ extension Attestation {
         
         let _ = try X509.Chain(trustAnchor: anchor)
             .validatingAndAppending(
-                certificate: statement.certificates[1],
+                certificates: statement.certificates.reversed(),
                 posixTime: date?.timeIntervalSince1970
             )
-            .validatingAndAppending(
-                certificate: statement.certificates[0],
-                posixTime: date?.timeIntervalSince1970
-            )
-            //.validatingAndAppending(certificate: statement.certificates[0])
     }
     
     /// 2. Create clientDataHash as the SHA256 hash of the one-time challenge sent to your app
