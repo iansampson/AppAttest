@@ -22,7 +22,7 @@ struct AssertionSample {
         init(_ assertion: Long) {
             self.assertion = Data(base64Encoded: assertion.assertionBase64)!
             clientData = Data(base64Encoded: assertion.clientDataBase64)!
-            publicKey = Data(base64Encoded: assertion.publicKey)!
+            publicKey = Data(base64Encoded: assertion.publicKeyX963)!
             teamID = assertion.teamIdentifier
             bundleID = assertion.bundleIdentifier
             previousCounter = nil // TODO: Or not?
@@ -38,7 +38,7 @@ struct AssertionSample {
         let bundleIdentifier: String
         
         let keyIdBase64: String
-        let publicKey: String
+        let publicKeyX963: String
         let clientDataBase64: String
         let clientDataHashSha256Base64: String
         let challengeBase64: String

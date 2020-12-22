@@ -5,27 +5,25 @@ import CryptoKit
 final class AppAttestTests: XCTestCase {    
     func testAttestation() {
         do {
-            try [
+            let samples = [
                 AttestationSample.iOS14_2,
                 AttestationSample.iOS14_3Beta2,
                 AttestationSample.iOS14_3Beta3,
                 AttestationSample.iOS14_3
-            ]
-                .map {
-                    $0.encoded
-                }
-                .forEach {
-                    let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
-                    let _ = try AppAttest.verify(
-                        attestation: $0.attestation,
-                        challenge: $0.challenge,
-                        appID: appID,
-                        keyID: $0.keyID,
-                        date: $0.date
-                    )
-                    //print(result.publicKey)
-                    //print(result.receipt)
-                }
+            ].map { $0.encoded }
+            
+            try samples.forEach {
+                let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
+                let _ = try AppAttest.verify(
+                    attestation: $0.attestation,
+                    challenge: $0.challenge,
+                    appID: appID,
+                    keyID: $0.keyID,
+                    date: $0.date
+                )
+                //print(result.publicKey)
+                //print(result.receipt)
+            }
         } catch {
             XCTFail(error.localizedDescription)
         }
@@ -34,20 +32,28 @@ final class AppAttestTests: XCTestCase {
     
     func testAssertion() {
         do {
-            let sample = AssertionSample.iOS14_3.encoded
-            let appID = AppAttest.AppID(teamID: sample.teamID, bundleID: sample.bundleID)
-            let publicKey = try P256.Signing.PublicKey(x963Representation: sample.publicKey)
+            let samples = [
+                AssertionSample.iOS14_2,
+                AssertionSample.iOS14_2Beta2,
+                AssertionSample.iOS14_2Beta3,
+                AssertionSample.iOS14_3
+            ].map { $0.encoded }
+            
+            try samples.forEach {
+                let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
+                let publicKey = try P256.Signing.PublicKey(x963Representation: $0.publicKey)
 
-            let _ = try AppAttest.verify(
-                assertion: sample.assertion,
-                clientData: sample.clientData,
-                receivedChallenge: sample.receivedChallenge,
-                storedChallenge: sample.storedChallenge,
-                storedCounter: sample.previousCounter,
-                appID: appID,
-                publicKey: publicKey
-            )
-            //print(result)
+                let _ = try AppAttest.verify(
+                    assertion: $0.assertion,
+                    clientData: $0.clientData,
+                    receivedChallenge: $0.receivedChallenge,
+                    storedChallenge: $0.storedChallenge,
+                    storedCounter: $0.previousCounter,
+                    appID: appID,
+                    publicKey: publicKey
+                )
+                //print(result)
+            }
             
         } catch {
             XCTFail(error.localizedDescription)

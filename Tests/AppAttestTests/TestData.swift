@@ -72,7 +72,7 @@ extension AssertionSample {
         teamIdentifier: "6MURL8TA57",
         bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
         keyIdBase64: "vkNBJ+U8wuzZ0acrCg6QhAv6YpgmykDX/Pt+M3D0Lls=",
-        publicKey: "BP6ldVTAgdcWWiLKLFL3RpFhQd2rZgvnBTojHh/YPSALSV6zuFvH/Q5WNe6eo7HE0sx5apu+jz2+OQm8RL3AB54=",
+        publicKeyX963: "BP6ldVTAgdcWWiLKLFL3RpFhQd2rZgvnBTojHh/YPSALSV6zuFvH/Q5WNe6eo7HE0sx5apu+jz2+OQm8RL3AB54=",
             // ANSI x9.63 representation
         /*
          -----BEGIN PUBLIC KEY-----
@@ -87,5 +87,68 @@ extension AssertionSample {
         timestamp: 1608379864, // 2020-12-19T12:11:04.864Z
         environment: .development,
         assertionBase64: "omlzaWduYXR1cmVYSDBGAiEAq+6JbxdXqVkZjW2QD3L6/GKxiUcq12AG3AWa6hgfi30CIQCFS+hPRqaXrwst0r8C4wZk8q3wZihDgms062UU22ZSzXFhdXRoZW50aWNhdG9yRGF0YVglRWUS6n4mlHark+G3lxaFWS/3P4lKwOwv1UgIoIv7bI9AAAAAAQ=="
+    )
+    
+    static let iOS14_2 = Long(
+        id: "9af5ab73-5120-3d79-b522-0bde308e1f25",
+        teamIdentifier: "6MURL8TA57",
+        bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
+        keyIdBase64: "2o0syRGn1HDKDv85d522XBC9nLqrHWHGnt/mJ5hWMQM=",
+        publicKeyX963: "BLqK+9/4UD0ZwmKwKtnRtFQjVrmTPv8Upbby6NIFm1X/jm7mnsOI/OTgfugeMAs3EhSb0ErTVjLUZGxXn5pADQs=",
+        /*
+         -----BEGIN PUBLIC KEY-----
+         MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEuor73/hQPRnCYrAq2dG0VCNWuZM+
+         /xSltvLo0gWbVf+Obuaew4j85OB+6B4wCzcSFJvQStNWMtRkbFefmkANCw==
+         -----END PUBLIC KEY-----
+         */
+        clientDataBase64: "d3VyemVscGZyb3Bm",
+        clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
+        challengeBase64: "d3VyemVs",
+        counter: 1,
+        timestamp: 1605996782, // 2020-11-21T22:13:02.829Z
+        environment: .development,
+        assertionBase64: "omlzaWduYXR1cmVYRzBFAiAdvdCWW+rOQZ/eQcADpCr+C3we+CBM86HSetOIhDyaeQIhAJGsDKsAVbdnuirOSImzWRh9x6cpCkeAMfXtfnEfVD+RcWF1dGhlbnRpY2F0b3JEYXRhWCVFZRLqfiaUdquT4beXFoVZL/c/iUrA7C/VSAigi/tsj0AAAAAB"
+    )
+    
+    static let iOS14_2Beta2 = Long(
+        id: "63606e32-484f-2742-b1e4-1a5b145c01a8",
+        teamIdentifier: "6MURL8TA57",
+        bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
+        keyIdBase64: "dIiQDBwg0ofvtSqBRH9XTRtm+D8YVZ1kPgBR9ahzxws=",
+        publicKeyX963: "BGR4sZdcDYd1d1gI+eWJ5WvjRpI693MLELBVNM2P6w3j3y5m38Fxa6UUxnReNV1AASPCCHv3wJRtxYWCZTQE49c=",
+        /*
+         -----BEGIN PUBLIC KEY-----
+         MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEZHixl1wNh3V3WAj55Ynla+NGkjr3
+         cwsQsFU0zY/rDePfLmbfwXFrpRTGdF41XUABI8IIe/fAlG3FhYJlNATj1w==
+         -----END PUBLIC KEY-----
+         */
+        clientDataBase64: "d3VyemVscGZyb3Bm",
+        clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
+        challengeBase64: "d3VyemVs",
+        counter: 1,
+        timestamp: 1606038493, // 2020-11-22T09:48:13.076Z
+        environment: .development,
+        assertionBase64: "omlzaWduYXR1cmVYRzBFAiEAhQtHDG1oPHjYrozSUHw6t0ziip+GbeshA4ZHtOvtKhcCIDzpmh/alhC8u7tktid8O3yDGNwahzZDzcgsEh0o8Y3BcWF1dGhlbnRpY2F0b3JEYXRhWCVFZRLqfiaUdquT4beXFoVZL/c/iUrA7C/VSAigi/tsj0AAAAAB"
+    )
+    
+    static let iOS14_2Beta3 = Long(
+        id: "76c8d980-ac0e-4717-231c-cd79990d7577",
+        teamIdentifier: "6MURL8TA57",
+        bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
+        keyIdBase64: "E3iOfwtPWlxRG1ht9N7vwGe7JC92+EBGh0m67S+NxJg=",
+        publicKeyX963: "BDYgb5BKRq7FC/GXp4e5zkNheh7XaZd88mZQQVNGsody8cLL8yhM6YgXLaFeUx2NgVkKZXRLhrh4UhrjMopPL6c=",
+        /*
+         -----BEGIN PUBLIC KEY-----
+         MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENiBvkEpGrsUL8Zenh7nOQ2F6Htdp
+         l3zyZlBBU0ayh3LxwsvzKEzpiBctoV5THY2BWQpldEuGuHhSGuMyik8vpw==
+         -----END PUBLIC KEY-----
+         */
+        clientDataBase64: "d3VyemVscGZyb3Bm",
+        clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
+        challengeBase64: "d3VyemVs",
+        counter: 1,
+        timestamp: 1606949114, // 2020-12-02T22:45:14.855Z
+        environment: .development,
+        assertionBase64: "omlzaWduYXR1cmVYRjBEAiBQVR7bEP0ZhcSuwoLPiJgxu2FgxV0Zytfh1NzoHV1tZgIgNJ8Plom3Wy4m2EoV7JMFgVm+Iao4KI2n6mpFHtVKBNNxYXV0aGVudGljYXRvckRhdGFYJUVlEup+JpR2q5Pht5cWhVkv9z+JSsDsL9VICKCL+2yPQAAAAAE="
     )
 }
