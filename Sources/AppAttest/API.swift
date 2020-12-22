@@ -30,17 +30,18 @@ extension AppAttest {
     // TODO: Allow initialization with a String
     // or StringLiteral.
     
-    public static func verify(
-        // TODO: Make these inputs more type-safe.
-        // Or at least document them properly
-        // (e.g. Attestation is a CBOR representation.)
-        attestation: Data,
+    public struct AttestationResponse {
+        let attestation: Data
+        let keyID: Data
+    }
+    
+    public static func verifyAttestation(
         challenge: Data,
+        response: AttestationResponse,
         appID: AppID,
-        keyID: Data,
         date: Date? = nil
     ) throws -> AttestationResult {
-        let attestation = try Attestation(data: attestation)
+        let attestation = try Attestation(data: response.attestation)
         let certificate = attestation.statement.certificates[0]
         
         guard let publicKeyData = certificate.publicKey else {
@@ -52,7 +53,7 @@ extension AppAttest {
         try attestation.verify(
             challenge: challenge,
             appID: appID.description,
-            keyID: keyID,
+            keyID: response.keyID,
             date: date
         )
         // TODO: Pass in publicKey as an argument.
@@ -68,38 +69,34 @@ extension AppAttest {
 // MARK: - Assertion
 
 extension AppAttest {
-    public struct AssertionResult {
-        let counter: Int
-    }
-    
-    public struct ReceivedAssertion {
+    // TODO: Namespace this struct/
+    // Assertion.ClientResponse
+    // Assertion.Challenge.Response
+    public struct AssertionResponse {
         let assertion: Data
         let clientData: Data
         let challenge: Data
     }
     
-    // TODO: Refine this API
-    // (e.g. disambiguate what stored and received mean,
-    // and when counter should be nil.)
-    public static func verify(
-        assertion: Data,
-        clientData: Data,
-        receivedChallenge: Data,
-        
-        storedChallenge: Data, // sentChallenge?
-        storedCounter: Int?, // previousCounter?
-        
-        appID: AppID,
-        publicKey: P256.Signing.PublicKey
+    public struct AssertionResult {
+        let counter: Int
+    }
+    
+    public static func verifyAssertion(
+        challenge: Data,
+        response: AssertionResponse,
+        previousResult: AssertionResult?,
+        publicKey: P256.Signing.PublicKey,
+        appID: AppID
     ) throws -> AssertionResult {
-        let assertion = try Assertion(cbor: assertion)
+        let assertion = try Assertion(cbor: response.assertion)
         try assertion.verify(
-            clientData: clientData,
+            clientData: response.clientData,
             publicKey: publicKey,
             appID: appID.description,
-            previousCounter: storedCounter,
-            receivedChallenge: receivedChallenge,
-            storedChallenge: storedChallenge
+            previousCounter: previousResult?.counter,
+            receivedChallenge: response.challenge,
+            storedChallenge: challenge
         )
         return AssertionResult(counter: Int(assertion.authenticatorData.counter))
     }

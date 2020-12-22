@@ -14,11 +14,11 @@ final class AppAttestTests: XCTestCase {
             
             try samples.forEach {
                 let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
-                let _ = try AppAttest.verify(
-                    attestation: $0.attestation,
+                let response = AppAttest.AttestationResponse(attestation: $0.attestation, keyID: $0.keyID)
+                let _ = try AppAttest.verifyAttestation(
                     challenge: $0.challenge,
+                    response: response,
                     appID: appID,
-                    keyID: $0.keyID,
                     date: $0.date
                 )
                 //print(result.publicKey)
@@ -42,15 +42,19 @@ final class AppAttestTests: XCTestCase {
             try samples.forEach {
                 let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
                 let publicKey = try P256.Signing.PublicKey(x963Representation: $0.publicKey)
-
-                let _ = try AppAttest.verify(
+                let response = AppAttest.AssertionResponse(
                     assertion: $0.assertion,
                     clientData: $0.clientData,
-                    receivedChallenge: $0.receivedChallenge,
-                    storedChallenge: $0.storedChallenge,
-                    storedCounter: $0.previousCounter,
-                    appID: appID,
-                    publicKey: publicKey
+                    challenge: $0.receivedChallenge
+                )
+                let previousResult = $0.previousCounter.map { AppAttest.AssertionResult(counter: $0) }
+                
+                let _ = try AppAttest.verifyAssertion(
+                    challenge: $0.storedChallenge,
+                    response: response,
+                    previousResult: previousResult,
+                    publicKey: publicKey,
+                    appID: appID
                 )
                 //print(result)
             }
