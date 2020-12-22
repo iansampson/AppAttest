@@ -12,6 +12,7 @@ extension AttestationData {
         bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
         keyIdBase64: "2o0syRGn1HDKDv85d522XBC9nLqrHWHGnt/mJ5hWMQM=",
         publicKey: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEuor73/hQPRnCYrAq2dG0VCNWuZM+/xSltvLo0gWbVf+Obuaew4j85OB+6B4wCzcSFJvQStNWMtRkbFefmkANCw==",
+        // TODO: Invalid. Either restore PEM representation or convert to ANSI x9.63 representation.
         clientDataBase64: "d3VyemVscGZyb3Bm",
         clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
         timestamp: 1605996780, // 2020-11-21T22:13:00.187Z
@@ -26,6 +27,7 @@ extension AttestationData {
         bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
         keyIdBase64: "dIiQDBwg0ofvtSqBRH9XTRtm+D8YVZ1kPgBR9ahzxws=",
         publicKey: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEZHixl1wNh3V3WAj55Ynla+NGkjr3cwsQsFU0zY/rDePfLmbfwXFrpRTGdF41XUABI8IIe/fAlG3FhYJlNATj1w==",
+        // TODO: Invalid. Either restore PEM representation or convert to ANSI x9.63 representation.
         clientDataBase64: "d3VyemVscGZyb3Bm",
         clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
         timestamp: 1606038490, // 2020-11-22T09:48:10.278Z
@@ -39,6 +41,7 @@ extension AttestationData {
         bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
         keyIdBase64: "E3iOfwtPWlxRG1ht9N7vwGe7JC92+EBGh0m67S+NxJg=",
         publicKey: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENiBvkEpGrsUL8Zenh7nOQ2F6Htdpl3zyZlBBU0ayh3LxwsvzKEzpiBctoV5THY2BWQpldEuGuHhSGuMyik8vpw==",
+        // TODO: Invalid. Either restore PEM representation or convert to ANSI x9.63 representation.
         clientDataBase64: "d3VyemVscGZyb3Bm",
         clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
         timestamp: 1606949112, // 2020-12-02T22:45:12.101Z
@@ -53,6 +56,7 @@ extension AttestationData {
         bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
         keyIdBase64: "vkNBJ+U8wuzZ0acrCg6QhAv6YpgmykDX/Pt+M3D0Lls=",
         publicKey: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/qV1VMCB1xZaIsosUvdGkWFB3atmC+cFOiMeH9g9IAtJXrO4W8f9DlY17p6jscTSzHlqm76PPb45CbxEvcAHng==",
+        // TODO: Invalid. Either restore PEM representation or convert to ANSI x9.63 representation.
         clientDataBase64: "d3VyemVscGZyb3Bm",
         clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
         timestamp: 1608379862, // 2020-12-19T12:11:02.163Z
@@ -68,7 +72,14 @@ extension AssertionData {
         teamIdentifier: "6MURL8TA57",
         bundleIdentifier: "de.vincent-haupert.apple-appattest-poc",
         keyIdBase64: "vkNBJ+U8wuzZ0acrCg6QhAv6YpgmykDX/Pt+M3D0Lls=",
-        publicKey: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/qV1VMCB1xZaIsosUvdGkWFB3atmC+cFOiMeH9g9IAtJXrO4W8f9DlY17p6jscTSzHlqm76PPb45CbxEvcAHng==",
+        publicKey: "BP6ldVTAgdcWWiLKLFL3RpFhQd2rZgvnBTojHh/YPSALSV6zuFvH/Q5WNe6eo7HE0sx5apu+jz2+OQm8RL3AB54=",
+            // ANSI x9.63 representation
+        /*
+         -----BEGIN PUBLIC KEY-----
+         MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/qV1VMCB1xZaIsosUvdGkWFB3atm
+         C+cFOiMeH9g9IAtJXrO4W8f9DlY17p6jscTSzHlqm76PPb45CbxEvcAHng==
+         -----END PUBLIC KEY-----
+         */
         clientDataBase64: "d3VyemVscGZyb3Bm",
         clientDataHashSha256Base64: "i+ZcylFa0JfJU5Z9GNY12G3XihQu09B3UmvtEca+xns=",
         challengeBase64: "d3VyemVs",

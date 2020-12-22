@@ -13,6 +13,7 @@ struct Assertion {
     let signature: Data
     let authenticatorData: AuthenticatorData
     
+    // TODO: Consider renaming.
     init(cbor data: Data) throws {
         let decoder = CodableCBORDecoder()
         let decoded = try decoder.decode(CodableCBOR.self, from: data)
@@ -70,7 +71,7 @@ extension Assertion {
         
         // 2. Concatenate authenticatorData and clientDataHash
         // and apply a SHA256 hash over the result to form nonce.
-        let nonce = SHA256.hash(data: authenticatorData.bytes + clientDataHash)
+        let nonce = Data(SHA256.hash(data: authenticatorData.bytes + clientDataHash))
         
         // 3. Use the public key that you stored from the attestation object
         // to verify that the assertion’s signature is valid for nonce.
@@ -79,12 +80,6 @@ extension Assertion {
         guard signingKey.isValidSignature(signature, for: nonce) else {
             throw ValidationError.invalidSignature
         }
-        // Signature algorithm: SHA256withECDSA
-        // TODO: Call to .isValidSignature returns false.
-        
-        // signing key
-        // signature: der-encoded -> ansi-represented -> CryptoKit
-        // nonce
         
         // 4. Compute the SHA256 hash of the client’s App ID, and verify
         // that it matches the RP ID in the authenticator data.

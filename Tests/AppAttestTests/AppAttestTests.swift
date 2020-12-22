@@ -1,5 +1,6 @@
 import XCTest
 @testable import AppAttest
+import CryptoKit
 
 final class AppAttestTests: XCTestCase {    
     func testAttestation() {
@@ -27,23 +28,7 @@ final class AppAttestTests: XCTestCase {
         do {
             let testData = AssertionData.iOS14_3
             let assertion = try Assertion(cbor: Data(base64Encoded: testData.assertionBase64)!)
-            
-            // Decode DER-encoded SPKI into raw bytes.
-            let publicKeyData = Data(base64Encoded: testData.publicKey)!
-            let node = try ASN1.parse(Array(publicKeyData))
-            let keyInfo = try ASN1.SubjectPublicKeyInfo(asn1Encoded: node)
-            let publicKey = Data(keyInfo.key.bytes)
-            
-            try assertion.verify(
-                clientData: Data(base64Encoded: testData.clientDataBase64)!,
-                publicKey: publicKey,
-                appID: testData.teamIdentifier + "." + testData.bundleIdentifier,
-                previousCounter: nil, //testData.counter,
-                receivedChallenge: Data(base64Encoded: testData.challengeBase64)!,
-                storedChallenge: Data(base64Encoded: testData.challengeBase64)!
-                // TODO: Passing both challenges using the same data does not
-                // really test anything, since the function just equates them.
-            )
+            try assertion.verify(testData)
         } catch {
             XCTFail(error.localizedDescription)
         }
@@ -51,5 +36,8 @@ final class AppAttestTests: XCTestCase {
 
     static var allTests = [
         ("testAttestation", testAttestation),
+        ("testAssertion", testAssertion)
     ]
 }
+
+// TODO: Add tests for invalid attestations and assertions.
