@@ -12,9 +12,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/myfreeweb/SwiftCBOR", from: "0.4.3"),
-        .package(url: "https://github.com/nextincrement/simple-asn1-reader-writer.git", from: "0.1.0"),
         .package(url: "https://github.com/apple/swift-crypto", from: "1.1.3"),
-        //.package(url: "https://github.com/iansampson/Anchor", from: "0.1.2")
         .package(url: "https://github.com/iansampson/Anchor", .branch("main"))
     ],
     targets: [
@@ -23,8 +21,7 @@ let package = Package(
             dependencies: [
                 "SwiftCBOR",
                 .product(name: "Crypto", package: "swift-crypto"),
-                "Anchor",
-                .product(name: "SimpleASN1Reader", package: "simple-asn1-reader-writer")
+                "Anchor"
             ]
         ),
         .testTarget(
