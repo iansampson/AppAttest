@@ -16,19 +16,21 @@ public enum AppAttest { }
 extension AppAttest {
     // Client response
     public struct AttestationResponse: Codable {
-        let attestation: Data
-        let keyID: Data
+        public let attestation: Data
+        public let keyID: Data
         
         public init(attestation: Data, keyID: Data) {
             self.attestation = attestation
             self.keyID = keyID
         }
+        
+        // TODO: Do you need the init if you make the properties public?
     }
     
     // Server result (to be stored in database)
     public struct AttestationResult {
-        let publicKey: P256.Signing.PublicKey
-        let receipt: Data
+        public let publicKey: P256.Signing.PublicKey
+        public let receipt: Data
     }
     
     public static func verifyAttestation(
@@ -71,9 +73,9 @@ extension AppAttest {
     
     // Client response
     public struct AssertionResponse: Codable {
-        let assertion: Data
-        let clientData: Data
-        let challenge: Data
+        public let assertion: Data
+        public let clientData: Data
+        public let challenge: Data
         
         public init(assertion: Data, clientData: Data, challenge: Data) {
             self.assertion = assertion
@@ -109,8 +111,8 @@ extension AppAttest {
 
 extension AppAttest {
     public struct AppID: Codable {
-        let teamID: String
-        let bundleID: String
+        public let teamID: String
+        public let bundleID: String
         
         var description: String {
             "\(teamID).\(bundleID)"
