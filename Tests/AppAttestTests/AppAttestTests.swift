@@ -1,6 +1,6 @@
 import XCTest
 @testable import AppAttest
-import CryptoKit
+import Crypto
 
 final class AppAttestTests: XCTestCase {    
     func testAttestation() {
@@ -15,13 +15,26 @@ final class AppAttestTests: XCTestCase {
             try samples.forEach {
                 let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
                 let response = AppAttest.AttestationResponse(attestation: $0.attestation, keyID: $0.keyID)
-                let _ = try AppAttest.verifyAttestation(
+                let result = try AppAttest.verifyAttestation(
                     challenge: $0.challenge,
                     response: response,
                     appID: appID,
                     date: $0.date
                 )
-                //print(result.publicKey)
+                
+                // init with
+                // * compact
+                // * der
+                // * pem
+                // * raw
+                // * x963: Security framework uses this one for elliptical keys
+                // all available in swift-crypto
+                
+                print("===")
+                print(Array(result.publicKey.x963Representation))
+                print("***")
+                print(Array(result.publicKey.rawRepresentation))
+                print("===")
                 //print(result.receipt)
             }
         } catch {
