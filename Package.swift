@@ -26,10 +26,7 @@ let package = Package(
         ),
         .testTarget(
             name: "AppAttestTests",
-            dependencies: ["AppAttest"],
-            resources: [
-                .process("Resources/Attestation.txt")
-            ]
+            dependencies: ["AppAttest"]
         )
     ]
 )

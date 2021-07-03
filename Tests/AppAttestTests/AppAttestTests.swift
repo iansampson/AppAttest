@@ -15,27 +15,12 @@ final class AppAttestTests: XCTestCase {
             try samples.forEach {
                 let appID = AppAttest.AppID(teamID: $0.teamID, bundleID: $0.bundleID)
                 let response = AppAttest.AttestationResponse(attestation: $0.attestation, keyID: $0.keyID)
-                let result = try AppAttest.verifyAttestation(
+                let _ = try AppAttest.verifyAttestation(
                     challenge: $0.challenge,
                     response: response,
                     appID: appID,
                     date: $0.date
                 )
-                
-                // init with
-                // * compact
-                // * der
-                // * pem
-                // * raw
-                // * x963: Security framework uses this one for elliptical keys
-                // all available in swift-crypto
-                
-                print("===")
-                print(Array(result.publicKey.x963Representation))
-                print("***")
-                print(Array(result.publicKey.rawRepresentation))
-                print("===")
-                //print(result.receipt)
             }
         } catch {
             XCTFail(error.localizedDescription)
@@ -69,7 +54,6 @@ final class AppAttestTests: XCTestCase {
                     publicKey: publicKey,
                     appID: appID
                 )
-                //print(result)
             }
             
         } catch {
