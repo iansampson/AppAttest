@@ -27,7 +27,7 @@ The following examples show how to validate assertions and attestations on your 
 
 ### Generate a challenge
 
-First, your app sends a request to the server (for example, trying to access some content) and the server responds with a challenge. The challenge should be random, unguessable, and unique (i.e. used only once per attestation). You could use[swift-crypto](https://github.com/apple/swift-crypto), for example, to generate a nonce:
+First, your app sends a request to the server (for example, trying to access some content) and the server responds with a challenge. The challenge should be random, unguessable, and unique (i.e. used only once per attestation). You could use [swift-crypto](https://github.com/apple/swift-crypto), for example, to generate a nonce:
 
 ``` Swift
 import Crypto
