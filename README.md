@@ -72,7 +72,7 @@ service.attestKey(keyId, clientDataHash: hash) { attestation, error in
 }
 ```
 
-Your app sends the attestation to your server (along with the key ID and the challenge ID, if you generated one in the first step). You’ll also need your 10-digit team ID (which you can find in App Store Connect) and your app’s bundle ID. Your server then calls the static AppAttest.verifyAttestation method to, well, verify the attestation.
+Your app sends the attestation to your server (along with the key ID and the challenge ID, if you generated one in the first step). You’ll also need your 10-digit team ID (which you can find in App Store Connect) and your app’s bundle ID. Your server then calls the static AppAttest.verifyAttestation method.
 
 ``` Swift
 import AppAttest
