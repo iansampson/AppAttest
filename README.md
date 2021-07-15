@@ -7,7 +7,7 @@ Note that this is still a young project and the API may change a little. At the 
 
 ## Installation
 
-AppAttest is distributed with the [Swift Package Manager](https://swift.org/package-manager/). To install it, just add the following dependency within your `Package.swift` manifest:
+AppAttest is distributed with the [Swift Package Manager](https://swift.org/package-manager/). To install it, add the following dependency to your `Package.swift` manifest:
 
 ``` Swift
 let package = Package(
@@ -22,7 +22,7 @@ let package = Package(
 
 ## Usage
 
-This example shows how to validate assertions and attestations on your server. The details of how to send data back and forth to your app (via HTTP requests and responses, for example) and handling state (such as storing challenges and assertions between server calls) are left as an exercise to the reader. For simplicity, code snippets are written at file scope, though you almost certainly want to wrap them inside functions.
+The following examples show how to validate assertions and attestations on your server. The code is reasonably generic, so you can decide for yourself how to communicate with your app (via HTTP requests and responses, for example) and handle state (such as storing challenges and assertions between server calls).
 
 
 ### Generate a challenge
