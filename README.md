@@ -41,7 +41,7 @@ Send this challenge to your app as part of the HTTP response and store it on you
 var challenges: [UUID: Data] = [:]
 
 let challengeID = UUID()
-challenges[challengeID] = challengeID
+challenges[challengeID] = challenge
 ```
 
 
