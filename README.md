@@ -47,9 +47,7 @@ challenges[challengeID] = challenge
 
 ### Verify an attestation
 
-When your app receives this challenge, use the DCAppAttestService to generate an attestation.
-
-The app will also need to generate a key if it hasn’t already done so.
+When your app receives this challenge, use the DCAppAttestService to generate an attestation. The app will also need to generate a key if it hasn’t already done so.
 
 ``` Swift
 import CryptoKit
