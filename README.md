@@ -139,7 +139,7 @@ let challenge = challenges[challengeID]
 let attestation = ...
 
 // If this is not the first assertion for this instance
-// of this app (i.e. for this unique key ID),
+// of the app (i.e. for this unique key ID),
 // retrieve the previous AssertionResult. Otherwise,
 // use nil for this value.
 let previousAssertion = ...
