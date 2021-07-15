@@ -152,10 +152,9 @@ do {
                                                response: response,
                                                previousResult: previousAssertion,
                                                publicKey: attestation.publicKey,
-                                               appID: appID
-    )
+                                               appID: appID)
 } catch {
-  // Handle error
+  // Handle the error
 }
 ```
 
