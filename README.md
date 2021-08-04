@@ -86,14 +86,14 @@ let challengeID: UUID = ...
 // Retrieve the challenge you generated in the previous step
 let challenge = challenges[challengeID]
 
-// Construct the attestation response and app ID,
+// Construct the attestation request and app ID,
 // which are simple structs
-let response = AttestationResponse(attestation: attestation, keyID: keyID)
+let request = AttestationRequest(attestation: attestation, keyID: keyID)
 let appID = AppID(teamID: "83Z139DVZ2", bundleID: "com.example.myapp")
 
 // Verify the attestation
 do {
-    let result = try AppAttest.verifyAttestation(challenge: challenge, response, appID: appID)
+    let result = try AppAttest.verifyAttestation(challenge: challenge, request: request, appID: appID)
 } catch {
     // Handle the error
 }
@@ -144,8 +144,8 @@ let attestation = ...
 // use nil for this value.
 let previousAssertion = ...
 
-// Construct the assertion response
-let response = AppAttest.AssertionResponse(clientResponse: assertion)
+// Construct the assertion request
+let response = AppAttest.AssertionRequest(clientResponse: assertion)
 
 do {
     let result = try AppAttest.verifyAssertion(challenge: challenge,
