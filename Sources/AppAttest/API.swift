@@ -147,7 +147,7 @@ extension AppAttest {
     public struct AssertionResult {
         /// A value that reports the number of times your app has used the attested key to sign an assertion.
         /// The `verifyAssertion` function extracts this value from the authenticator data
-        /// contained in the CBOR-assertion object and ensures that it is higher than the previous result.
+        /// contained in the assertion object and ensures that it is greater than the previous counter.
         public let counter: Int
     }
     // TODO: Consider including an identifier
@@ -201,13 +201,12 @@ extension AppAttest {
         )
         return AssertionResult(counter: Int(assertion.authenticatorData.counter))
     }
-    // TODO: Add a note in the documentation warning the user
-    // to use a different challenge for attestation and assertion
-    // (and to never reuse a challenge).
+    // TODO: Add a reminder to use a different challenge
+    // for attestation and assertion (and to never reuse a challenge).
 }
 
 extension AppAttest {
-    /// The app identifier for the client,
+    /// The client’s app identifier,
     /// composed of the developer’s team identifier
     /// and the app’s bundle identifier.
     public struct AppID: Codable {
