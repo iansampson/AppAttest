@@ -110,11 +110,11 @@ Verifying assertions follows a similar process. Your app sends a request to the 
 import CryptoKit
 
 let challenge = // Challenge from your server
-let hash = Data(SHA256.hash(data: clientData))
+let hash = Data(SHA256.hash(data: challenge))
 // For more complex assertions, you can also embed
 // the challenge in a JSON payload along with other data
 
-service.generateAssertion(keyId, clientDataHash: clientDataHash) { assertion, error in
+service.generateAssertion(keyId, clientDataHash: hash) { assertion, error in
     guard error == nil else {
         // Handle the error
     }
