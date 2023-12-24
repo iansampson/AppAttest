@@ -13,7 +13,7 @@ AppAttest is distributed with the [Swift Package Manager](https://swift.org/pack
 let package = Package(
     ...
     dependencies: [
-        .package(url: "https://github.com/iansampson/AppAttest", .branch("main"))
+        .package(url: "https://github.com/iansampson/AppAttest.git", branch: "main")
     ],
     ...
 )
