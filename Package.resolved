@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Anchor",
+        "repositoryURL": "https://github.com/iansampson/Anchor",
+        "state": {
+          "branch": "main",
+          "revision": "1b1d5a9eec5413247bd79ede386bb704e15fff02",
+          "version": null
+        }
+      },
+      {
+        "package": "swift-crypto",
+        "repositoryURL": "https://github.com/apple/swift-crypto",
+        "state": {
+          "branch": null,
+          "revision": "b51f1d6845b353a2121de1c6a670738ec33561a6",
+          "version": "3.1.0"
+        }
+      },
+      {
+        "package": "SwiftCBOR",
+        "repositoryURL": "https://github.com/myfreeweb/SwiftCBOR",
+        "state": {
+          "branch": null,
+          "revision": "edc01765cf6b3685bb622bb09242ef5964fb991b",
+          "version": "0.4.6"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

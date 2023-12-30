@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.5
 
 import PackageDescription
 
@@ -11,9 +11,9 @@ let package = Package(
             targets: ["AppAttest"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/myfreeweb/SwiftCBOR", from: "0.4.3"),
-        .package(url: "https://github.com/apple/swift-crypto", from: "1.1.3"),
-        .package(url: "https://github.com/iansampson/Anchor", .branch("main"))
+        .package(url: "https://github.com/myfreeweb/SwiftCBOR", from: "0.4.6"),
+        .package(url: "https://github.com/apple/swift-crypto", from: "3.1.0"),
+        .package(url: "https://github.com/iansampson/Anchor", branch: "main"),
     ],
     targets: [
         .target(
